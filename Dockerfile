@@ -14,6 +14,7 @@ RUN apt-get update --fix-missing && \
     cd .. && bin/nim c koch && \
     ./koch boot -d:release && \
     echo 'export PATH=/opt/Nim/bin:$PATH' >> /root/.bashrc && \
+    mkdir -p /root/.local/share/jupyter/kernels/nim/ && \
     mv /root/kernel.json /root/.local/share/jupyter/kernels/nim/ && \
     mv /root/nimkernel.py /opt/conda/lib/python3.5/site-packages/ && \
     rm -rf /var/lib/apt/lists/*
