@@ -1,5 +1,8 @@
 FROM tsutomu7/scientific-python
 
+ADD nim.tgz /root/
+EXPOSE 8888
+WORKDIR /root
 RUN apt-get update --fix-missing && \
     apt-get install -y gcc git && \
     apt-get clean && \
@@ -11,8 +14,7 @@ RUN apt-get update --fix-missing && \
     cd .. && bin/nim c koch && \
     ./koch boot -d:release && \
     echo 'export PATH=/opt/Nim/bin:$PATH' >> /root/.bashrc && \
+    mv /root/kernel.json /root/.local/share/jupyter/kernels/nim/ && \
+    mv /root/nimkernel.py /opt/conda/lib/python3.5/site-packages/ && \
     rm -rf /var/lib/apt/lists/*
-ADD nim.tgz /root/
-EXPOSE 8888
-WORKDIR /root
 CMD ["sh", "-c", "jupyter notebook --ip=*"]
