@@ -1,6 +1,7 @@
 FROM tsutomu7/scientific-python
 
 ADD nim.tgz /root/
+ENV PATH=/opt/Nim/bin:$PATH
 EXPOSE 8888
 WORKDIR /root
 RUN apt-get update --fix-missing && \
